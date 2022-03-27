@@ -194,10 +194,8 @@ def app(image_dir,threads,model):
     file = json.load(file)
     test_dir_crops = os.listdir('unseen_data/crops')
     test_dir_crops.sort()
-    count = 0
     true = 0
     false = 0
-    actual_real=0
     for idx,(i,mask,crops) in enumerate(zip(final,test_dir,test_dir_crops)):
         filename = 'unseen_data/masks/'+mask
         filename_crops = 'unseen_data/crops/'+crops
@@ -210,7 +208,6 @@ def app(image_dir,threads,model):
 
         if file[name+'.mp4']['label'] == 'REAL':
             true_out = 1.0
-            actual_real+=1
         else:
             true_out = 0.0
             
@@ -223,10 +220,6 @@ def app(image_dir,threads,model):
             true+=1
         else:
             false+=1
-        if output>0.5:
-            mask_img.save('prediction/'+mask)
-            count+=1
-    print('total real images predicted by the model = ',count)
     print('Correct {}, Wrong {}'.format(true, false))
 
    

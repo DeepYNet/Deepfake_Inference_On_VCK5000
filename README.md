@@ -105,7 +105,32 @@ sudo /opt/xilinx/xrt/bin/xbutil validate --device 0000:01:00.1
 ```
 
 # CHAPTER 2: Software Model
-- Sravan 
+## 2.1 U-YNet Model
+
+There are many pre-trained models that perform deepfakes classification and localization tasks separately, but there are no models that do the task simultaneously. Such models where 2 tasks share the same backbone are called multi-task models.
+
+We are using this architecture as the tasks performed by the multi-tasking models have the advantage of learning from each other; i.e., in our model, the classification task learns from the segmentation task, hence improving the accuracy and vice-versa. We call this model the U-YNet architecture as the 2 tasks share a UNet backbone.
+
+![image](https://user-images.githubusercontent.com/22630228/161117542-5406d25f-2234-46f5-bec5-31524c919366.png)
+
+## 2.2 Dataset
+
+All currently available public DeepFake datasets include both real and manipulated videos and images. There are many datasets like UADFV, FaceForensics++, CelebDF, Google DFD and the DFDC dataset. Fake videos were generated from these recorded or collected videos using different DeepFake generators.
+![image](https://user-images.githubusercontent.com/22630228/161117672-0f36a5b5-56d0-4f9c-8dfd-e9643f37eeb2.png)
+
+As we can see from the above diagram DFDC is currently the largest available deepfakes dataset with the most number of videos and faces. So we decided to choose this dataset over others for training the model.
+
+![image](https://user-images.githubusercontent.com/22630228/161117736-6b129048-f84b-47ea-9784-ffa1950b992e.png)
+
+The dataset does not come with the segmentation masks that we need for training the segmentation branch of the U-YNet model. To create the mask, we generate a pixel-wise difference mask by calculating the Structural Similarity Index (SSIM) between the frame of a real, and its corresponding fake video. This difference mask contains 1 for manipulated pixels and 0 for real ones.
+
+![image](https://user-images.githubusercontent.com/22630228/161117803-9fde9ab0-5c40-4e37-90da-a2039469588a.png)
+
+One problem observed while training models is that, initially we were getting 99% accuracy on the DFDC dataset, which meant that the model was overfitting. After insinuating on this problem, we found the reason. While randomly splitting the dataset into testing, training, and validation datasets, the training dataset had examples of all the faces in the dataset. So the model was basically learning/remembering the faces and not the deepfake features. So, while testing the model on the testing dataset, the model was giving very high accuracy. This problem is called data leakage.
+
+To solve this problem we used the information given in the metadata.json file that DFDC provides. metadata.json file provides the mapping of fake faces to the real faces from which they were produced. We split the dataset such that the testing data had no faces similar to those in the training dataset.
+
+We will release the dataset as soon as possible.
 
 # CHAPTER 3: Deploy Process On VCK5000
 - rahul 

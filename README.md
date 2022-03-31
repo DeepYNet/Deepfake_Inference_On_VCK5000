@@ -1,15 +1,20 @@
-# Deepfake_Inference_On_VCK5000
+# Deepfake Inference on VCK5000
 
-# CHAPTER 1: INTRODUCTION
+# CHAPTER 1: Introduction and Setup
 
 ## 1.1 Abstract:
-Better generative models and larger datasets have led to more realistic fake videos that can fool the human eye and machines. Today, the danger of fake news is widely acknowledged, and in a context where more than 100 million hours of video content are watched daily on social networks, the spread of falsified video raises more and more concerns. While significant improvements have been made in the field of deepfakes classification, deepfakes detection and reconstruction have remained a difficult task. Because of the rapid increase in technology, in the future deep fake videos can be seen everywhere, for example, on live news channels. So it is required to effectively detect the deepfake in the least time and possibly restore it. In this report, we are presenting the initial results of our experiments on forgery segmentation. Also, we have performed various experiments of running Quantized Neural Networks (QNNs) on FPGAs for better interference.
 
-## 1.2 Technical Keywords:
+Better generative models and larger datasets have led to more realistic fake videos that can fool the human eye and machines. Today, the danger of fake news is widely acknowledged, and in a context where more than 100 million hours of video content are watched daily on social networks, the spread of falsified videos raises more and more concerns.
 
-Deepfakes, Image Forensics, CNN, Image Reconstruction, Image Augmentations, FPGA, QNN
+Because of the rapid increase in technology and faster computation speeds, in the future, deep fake videos can be seen and broadcast live, everywhere, for example, on live news channels, streaming websites like Youtube, Twitch, Instagram etc. Effective detection is important to combat the malicious spread and use of deepfakes videos.
 
-## 1.3 Problem Statement:
+![image](https://user-images.githubusercontent.com/22630228/161118911-f83fe30d-b90f-4a68-97f1-fa087966146a.png)
+
+For Example on March 16, a video claiming to show Ukraine President Volodymyr Zelenskyy calling for the Ukrainian people to surrender to Russia was aired on news station Ukraine 24, and [circulated on social media](https://twitter.com/_delanay/status/1504048298520371201).
+
+This Shows the need for faster decoding of such deepfaked videos before going viral. We are aiming to increase the deepfake inference using Xilinx's VCK5000 AI Versal Card.
+
+## 1.2 Problem statement:
 
 ### DEEPFAKE D-I-R (Detection-Inference-Restoration)
 
@@ -17,7 +22,12 @@ Deepfakes, Image Forensics, CNN, Image Reconstruction, Image Augmentations, FPGA
 **Inference:** Utilizing FPGA hardware-based acceleration for reducing inference time and power requirements compared to traditional methods.
 **Restoration:** Restoring the original face of the person on whom the deepfake video was created.
 
+## 1.3 Flowchart:
+
+![image](https://user-images.githubusercontent.com/22630228/161119376-86e17549-62da-4fab-945f-daaee5a574ea.png)
+
 ## 1.4 Hardware Setup:
+
 We had tried setting up the VCK5000 on various system, following are the details about the setups that we had tried:
 ![](assets/2022-03-01-11-58-15.png)
 
@@ -104,7 +114,52 @@ sudo /opt/xilinx/xrt/bin/xbmgmt flash --update
 sudo /opt/xilinx/xrt/bin/xbutil validate --device 0000:01:00.1
 ```
 
-# CHAPTER 2: Software Model
+## 1.6 Validating VCK5000 setup
+
+We will be validating the software and hardware setup of vck5000 by running a few simple video and image classification sample models from Vitis AI.
+
+First Download the Vitis AI Images and Video Samples:
+```bash
+wget https://www.xilinx.com/bin/public/openDownload?filename=vitis_ai_library_r1.4.0_images.tar.gz -O vitis_ai_library_r1.4.0_images.tar.gz
+wget https://www.xilinx.com/bin/public/openDownload?filename=vitis_ai_library_r1.4.0_video.tar.gz -O vitis_ai_library_r1.4.0_video.tar.gz
+tar -xzvf vitis_ai_library_r1.4.0_images.tar.gz -C demo/Vitis-AI-Library/
+tar -xzvf vitis_ai_library_r1.4.0_video.tar.gz -C demo/Vitis-AI-Library/
+```
+
+Then do the following steps to run ssd_traffic_pruned_0_9:
+
+```bash
+cd /usr/share/vitis_ai_library/
+sudo mkdir models
+cd models
+sudo wget -O ssd_traffic_pruned_0_9 https://www.xilinx.com/bin/public/openDownload?filename=ssd_traffic_pruned_0_9-vck5000-DPUCVDX8H-r1.4.1.tar.gz
+sudo tar -xvzf ssd_traffic_pruned_0_9
+cd ../samples/ssd
+./test_video_ssd ssd_traffic_pruned_0_9 /workspace/demo/Vitis-AI-Library/samples/classification/video_analysis/video/structure.webm -t 8
+```
+
+Note:
+If you are getting any sort of error in displaying in the video then follow these steps:
+
+On Host Computer:
+
+```bash
+export DISPLAY=':0'
+xhost +
+```
+
+Add this in the docker_run.sh
+
+`-e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.Xauthority:/tmp/.Xauthority \`
+
+After the docker is on, run the following commands:
+
+```bash
+cp /tmp/.Xauthority ~/
+sudo chown vitis-ai-user:vitis-ai-group ~/.Xauthority
+```
+
+# CHAPTER 2: Deep Learning Model
 ## 2.1 U-YNet Model
 
 There are many pre-trained models that perform deepfakes classification and localization tasks separately, but there are no models that do the task simultaneously. Such models where 2 tasks share the same backbone are called multi-task models.

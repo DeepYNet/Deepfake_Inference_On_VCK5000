@@ -276,7 +276,7 @@ We are using this DPUCVDX8H on VCK5000:
 
 **To compile the model for VCK5000 DPU:**
 
-`vai_c_xir -x build/ouant_model/UNet_int.xmodel -a /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK5000/arch.json -o vck_5000_class_weight/ -n YNET`
+`vai_c_xir -x build/quant_model/UNet_int.xmodel -a /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK5000/arch.json -o vck_5000_class_weight/ -n YNET`
 
 ## 3.3 Inference:
 
@@ -297,6 +297,13 @@ To execute the video inference code on VCK5000 run the below command
 `python deep_fakes_video_inference.py`
 
 # CHAPTER 4: RESULTS
+
+
+[![video](https://img.youtube.com/watch?v=c3edt95_qlM.jpeg)](https://youtube.com/watch?v=c3edt95_qlM)
+
+[![video](https://img.youtube.com/watch?v=n57Yemfs9Gg.jpeg)](https://youtube.com/watch?v=n57Yemfs9Gg)
+
+
 ![image](assets/output_compare.jpeg)
 
 ![image](assets/Table.jpeg) 

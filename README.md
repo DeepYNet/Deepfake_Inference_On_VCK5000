@@ -297,7 +297,10 @@ To execute the video inference code on VCK5000 run the below command
 `python deep_fakes_video_inference.py`
 
 # CHAPTER 4: RESULTS
-![image](assets/output_compare.jpeg) 
+![image](assets/output_compare.jpeg)
+
+![image](assets/Table.jpeg) 
+
 
 # CHAPTER 5: Future Goals
 

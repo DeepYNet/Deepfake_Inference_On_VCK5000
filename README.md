@@ -186,7 +186,40 @@ One problem observed while training models is that, initially we were getting 99
 
 To solve this problem we used the information given in the metadata.json file that DFDC provides. metadata.json file provides the mapping of fake faces to the real faces from which they were produced. We split the dataset such that the testing data had no faces similar to those in the training dataset.
 
-We will release the dataset as soon as possible.
+## 2.3 Training
+- clone the GitHub repository  
+`git clone https://github.com/DeepYNet/Deepfakes-classification-and-segmentation-models.git`
+- cd to the UYNet directory  
+`cd Deepfakes-classification-and-segmentation-models`
+- Change the path according to your dataset at lines 20, 21, 23, 24 in the fyp_train.py file.
+- Run the training code  
+`python fyp_train.py`
+- The code also has wandb integration. So the model metrics can be observed easily from their website. You will get the link to the wandb site printed on your terminal after running your code.
+
+You can run the model for as long as you want. We trained the U-YNet model for 25 epochs on the NVIDIA DGX GPU. The weights will be saved after every 2 epochs and can be found in the checkpoints folder.  
+If you want to use the pre-trained weights. You can download the weights from this link and put the weights in the checkpoints folder.  
+If you are facing `CUDA MEMORY ERROR` then just decrease the num-workers and `batch size` parameters.
+
+## 2.4 Evaluation
+The input image is the face from the input frame and there will be 2 outputs: One from the classification branch which will be a 0 for "fake" class prediction and 1 for "real" class prediction; the other output is the segmentation mask, which will have the same shape as the input image. It will have 1 as a pixel value for "fake" class prediction and 0 for "real" class prediction.  
+
+To test the model output, run the fyp_predict.ipynb cell by cell. You will get output  like:
+
+![image](https://hackster.imgix.net/uploads/attachments/1424598/fyp_AyI6QqCBNG.png?auto=compress%2Cformat&w=740&h=555&fit=max)  
+
+In the below image we can see more predictions on input fake images.  
+
+![image](https://hackster.imgix.net/uploads/attachments/1415570/hackster-img8_oT3y2Vuju5.png?auto=compress%2Cformat&w=740&h=555&fit=max)
+
+You can even get the number of correct and wrong predictions in the test dataset. Run:
+`python fyp_results.py`  
+
+We got an accuracy of `94.35%` on the test dataset.
+
+## 2.5 Demo
+[![video](https://img.youtube.com/vi/5V2xu6M-31M/0.jpg)](https://youtu.be/5V2xu6M-31M)
+
+
 
 # CHAPTER 3: Deploy Process On VCK5000
 - rahul 

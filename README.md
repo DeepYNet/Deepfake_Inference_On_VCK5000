@@ -236,7 +236,7 @@ We will load our floating-point model and load them in the same way as we had do
 The torch_qauntizer replaces the floating module with a quantized module. It takes the model which we had loaded and an input tensor with the same dimension on which it has been trained. The following code snippet shows how we have passed the variables to the torch_qauntizer:
 
 ```python
-rand_in = torch.randn([batch_size, 3, 224, 224]).cuda()
+rand_in = torch.randn([batch_size, 3, 224, 224])
 quantizer = torch_quantizer(quant_mode, net, (rand_in), output_dir=quant_model) 
 quantized_model = quantizer.quant_model
 ```

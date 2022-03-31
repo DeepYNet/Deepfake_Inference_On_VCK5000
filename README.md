@@ -219,10 +219,78 @@ We got an accuracy of `94.35%` on the test dataset.
 ## 2.5 Demo
 [![video](https://img.youtube.com/vi/5V2xu6M-31M/0.jpg)](https://youtu.be/5V2xu6M-31M)
 
-
-
 # CHAPTER 3: Deploy Process On VCK5000
-- rahul 
+
+Once the model has been successfully trained and the best weights have been selected, we will then proceed to quantize and compile the model for deployment on the VCK5000 FPGA.
+
+## 3.1 Quantization
+
+For proceeding towards quantization which is the first step towards deploying the model on VCK5000, we will first activate the Vitis-AI docker and then activate the anaconda environment for Pytorch via the following command:
+
+`conda activate vitis-ai-pytorch`
+
+Once this has been done, we will proceed to the directory where our quantization scripts are located. As we can see in the quantization script, we will have to import the torch_qauntizer and the dump_xmodel from the pytorch_nndct library. These are required for quantizing the model.
+
+We will load our floating-point model and load them in the same way as we had done while testing the model for inference. For quantization, we will take our validation dataset and rename it as the calibration dataset. The reason we require a calibration dataset is that we will need to calibrate or estimate the range (min, max) of all floating-point tensors in the model. Unlike constant tensors such as weights and biases, variable tensors such as model input, activations (outputs of intermediate layers), and model output cannot be calibrated unless we run a few inference cycles. Vitis AI recommends a small calibration dataset size of 100-1000 images.
+
+The torch_qauntizer replaces the floating module with a quantized module. It takes the model which we had loaded and an input tensor with the same dimension on which it has been trained. The following code snippet shows how we have passed the variables to the torch_qauntizer:
+
+```python
+rand_in = torch.randn([batch_size, 3, 224, 224]).cuda()
+quantizer = torch_quantizer(quant_mode, net, (rand_in), output_dir=quant_model) 
+quantized_model = quantizer.quant_model
+```
+
+(NOTE: It is recommended to load the model and apply the quantization process on the GPU as it speeds up the process; otherwise applying it on the CPU will also work)
+
+The quant_mode decides whether the model is to be calibrated or evaluated. Calibration mode determines quantization steps of tensors in the evaluation process if flag quant_mode is set to "calib". After calibration, we can evaluate the quantized model by setting quant_mode to "test".
+
+First of all download the weights of the model:
+
+```bash
+git clone https://github.com/DeepYNet/Deepfake_Inference_On_VCK5000
+cd deepfake_vitis_ai/build/float_model/
+gdown https://drive.google.com/uc?id=1pmXnmlShfY9eIOAqmx8H_iBIOTNnNbw3
+```
+
+Then run quant script using:
+
+```bash
+cd deepfake_vitis_ai/
+python quant.py --quant_mode calib -b 8
+```
+
+The Quantize calibration step determines the quantization step of tensors in evaluation process if the flag quant_mode is set to calib.
+
+Then run quant script again for evaluating the model
+
+`python quant.py --quant_mode test`
+
+After calibration, by setting the quant_mode flag to test , we can evaluate the quantized model with it. The accuracy received at the end of this step is the right accuracy for the quantized model. **An xmodel file will be generated in the quant_model folder which is later used for DPU compilation.**
+
+## 3.2 Compiler
+
+The Vitis AI Compiler generates the compiled model based on the DPU microarchitecture. There are a number of different DPUs supported in Vitis AI for different platforms and applications.
+
+We are using this DPUCVDX8H on VCK5000:
+
+**To compile the model for VCK5000 DPU:**
+
+`vai_c_xir -x vck_5000_class_weight/UNet_int.xmodel -a /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK5000/arch.json -o vck_5000_class_weight/ -n unet_deploy_classification`
+
+## 3.3 Inference:
+
+For Inference on VCK5000, we are using VART APIs and we have primarily used MNIST Inference script from Vitis AI Tutorials as Reference (https://github.com/Xilinx/Vitis-AI-Tutorials/tree/master/Design_Tutorials/02-MNIST_classification_tf)
+
+First, we resize our Input Image to 224 x 224 then we divide the Input Image by 255 to convert the range from 0-255 to 0-1.0 range. The Images get appended to a list which is then passed to the model loaded into VCK5000.
+
+We then append the images in a list and pass it onto the compiled model which is loaded into the VCK5000. VCK5000 takes the images in batches of 8 and gives us 2 output, the output segmented mask, and a classification label that tells us if the image or video is a deep fake content or not. The segmented output is stored in a .npy format for post processing so we could visualize the output in a jupyter notebook.
+
+The classification output is given at the end of the inference code which tells us how well the model performed on unseen data. A Json file contains the label for unseen data, we compare it with the model output and print the accuracy of how well it performs.
+
+To execute the inference code on VCK5000 run the below command
+
+`python app_mt_demo_hackster.py --images unseen_data/crops --model YNET_FFT.xmodel -t 12`
 
 # CHAPTER 4: RESULTS
 - vedant 

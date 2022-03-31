@@ -1,20 +1,16 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
+import torch
+from torch.utils.data import DataLoader, random_split
 import os
 import sys
 import random
 import argparse
-
 from pytorch_nndct.apis import torch_quantizer, dump_xmodel
-
-from utils.data_loading import BasicDataset, CarvanaDataset
-from utils.dice_score import dice_loss
 from evaluate import evaluate
 from unet import UNet
-
 from utils.data_loading import CarvanaDataset
-from utils.dice_score import dice_loss
 from pathlib import Path
 
 
@@ -58,8 +54,7 @@ def quantization(model,build_dir,batch_size,quant_mode):
     
     if (quant_mode=='test'):
         batch_size = 1
-    #[channel,height,width]
-    rand_in = torch.randn([batch_size, 3, 224, 224]).cuda()
+    rand_in = torch.randn([batch_size, 3, 224, 224])
     quantizer = torch_quantizer(quant_mode, net, (rand_in), output_dir=quant_model) 
     quantized_model = quantizer.quant_model
     

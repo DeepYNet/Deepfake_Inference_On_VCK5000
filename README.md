@@ -116,6 +116,7 @@ We are using this architecture as the tasks performed by the multi-tasking model
 ## 2.2 Dataset
 
 All currently available public DeepFake datasets include both real and manipulated videos and images. There are many datasets like UADFV, FaceForensics++, CelebDF, Google DFD and the DFDC dataset. Fake videos were generated from these recorded or collected videos using different DeepFake generators.
+
 ![image](https://user-images.githubusercontent.com/22630228/161117672-0f36a5b5-56d0-4f9c-8dfd-e9643f37eeb2.png)
 
 As we can see from the above diagram DFDC is currently the largest available deepfakes dataset with the most number of videos and faces. So we decided to choose this dataset over others for training the model.

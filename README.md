@@ -299,9 +299,9 @@ To execute the video inference code on VCK5000 run the below command
 # CHAPTER 4: RESULTS
 
 
-[![video](https://img.youtube.com/watch?v=c3edt95_qlM.jpeg)](https://youtube.com/watch?v=c3edt95_qlM)
+[![video](https://img.youtube.com/watch?v=c3edt95_qlM.jpg)](https://youtube.com/watch?v=c3edt95_qlM)
 
-[![video](https://img.youtube.com/watch?v=n57Yemfs9Gg.jpeg)](https://youtube.com/watch?v=n57Yemfs9Gg)
+[![video](https://img.youtube.com/watch?v=n57Yemfs9Gg.jpg)](https://youtube.com/watch?v=n57Yemfs9Gg)
 
 
 ![image](assets/output_compare.jpeg)

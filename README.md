@@ -18,9 +18,9 @@ This Shows the need for faster decoding of such deepfaked videos before going vi
 
 ### DEEPFAKE D-I-R (Detection-Inference-Restoration)
 
-**Detection:** Identifying manipulated regions by creating a segmentation mask and improving detections using the mask.
-**Inference:** Utilizing FPGA hardware-based acceleration for reducing inference time and power requirements compared to traditional methods.
-**Restoration:** Restoring the original face of the person on whom the deepfake video was created.
+* **Detection:** Identifying manipulated regions by creating a segmentation mask and improving detections using the mask.         
+* **Inference:** Utilizing FPGA hardware-based acceleration for reducing inference time and power requirements compared to traditional methods.           
+* **Restoration:** Restoring the original face of the person on whom the deepfake video was created.              
 
 ## 1.3 Flowchart:
 

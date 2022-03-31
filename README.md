@@ -296,4 +296,21 @@ To execute the inference code on VCK5000 run the below command
 - vedant 
 
 # CHAPTER 5: Future Goals
+
+Our project provides classification outputs on deepfaked videos, which is an important piece of information. In the future, we would like to make a simple easy-to-use extension that will accept user's input and forward it to the Cloud FPGA farm such as Alveo, VCK5000 which will detect the deepfaked video in real-time.
+
+Our project also provides segmentation output. This output can be used as the first stage towards deepfakes restoration, i.e finding the culprit behind the deepfake.
+
+In this project, we had tried accessing VCK5000 AIE cores using Vitis Flow, but unfortunately, the VCK5000 didn't have vitis flow supported. In the future, we would like to perform pre and post-processing related operations on FPGA itself hereby increasing the total Inference time of deepfake detection.
+
 # CHAPTER 6: Conclusion 
+
+We are a group of undergrad students from VJTI, Mumbai. We are a part of a Research Group at our university with expertise in deepfake detection. Because of the rapid increase in technology and faster computation speeds, deepfake generation was one of the concerns in the upcoming era.
+
+In this project, we were able to accelerate deepfake detection on VCK5000. We were able to classify the deepfaked images as well as videos on the Accelerated DPU, AIE cores on VCK5000.
+
+We have observed that VCK5000 beats various other inference nodes like Nvidia T4, as well as Nvidia DGX 1 and other GPUs like RTX 3060.
+
+In short following image describes the performance of the VCK5000 Card by Xilinx: 
+
+![image](https://user-images.githubusercontent.com/22630228/161130772-04bfa9b7-366f-491f-8e0b-610aa0b05557.png)

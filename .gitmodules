@@ -1,0 +1,3 @@
+[submodule "Deepfakes-classification-and-segmentation-models"]
+	path = Deepfakes-classification-and-segmentation-models
+	url = https://github.com/DeepYNet/Deepfakes-classification-and-segmentation-models.git

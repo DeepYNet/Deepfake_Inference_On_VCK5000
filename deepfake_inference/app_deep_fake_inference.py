@@ -210,7 +210,7 @@ def main():
   ap = argparse.ArgumentParser()
   ap.add_argument('-d', '--images',  type=str,default='images',            help='Path to folder of images.')
   ap.add_argument('-t', '--threads', type=int, default=1, help='Number of threads. Default is 1')
-  ap.add_argument('-m', '--model',   type=str,default='unet.xmodel',            help='Path of xmodel')
+  ap.add_argument('-m', '--model',   type=str,default='YNET.xmodel',            help='Path of xmodel')
 
   args = ap.parse_args()
 

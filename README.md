@@ -297,7 +297,7 @@ To execute the video inference code on VCK5000 run the below command
 `python deep_fakes_video_inference.py`
 
 # CHAPTER 4: RESULTS
-
+Below we have shown the results of a video from the test dataset on U-YNet model on VCK5000. The generated mask is overlapped on the video to get a better understanding of where the frame was modified.
 
 [![video](https://img.youtube.com/watch?v=c3edt95_qlM.jpg)](https://youtube.com/watch?v=c3edt95_qlM)
 

@@ -214,7 +214,7 @@ In the below image we can see more predictions on input fake images.
 You can even get the number of correct and wrong predictions in the test dataset. Run:
 `python fyp_results.py`  
 
-We got an accuracy of `94.35%` on the test dataset.
+We got an accuracy of `94.12%` on the test dataset.
 
 ## 2.5 Demo
 [![video](https://img.youtube.com/vi/5V2xu6M-31M/0.jpg)](https://youtu.be/5V2xu6M-31M)
@@ -276,7 +276,7 @@ We are using this DPUCVDX8H on VCK5000:
 
 **To compile the model for VCK5000 DPU:**
 
-`vai_c_xir -x vck_5000_class_weight/UNet_int.xmodel -a /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK5000/arch.json -o vck_5000_class_weight/ -n unet_deploy_classification`
+`vai_c_xir -x build/ouant_model/UNet_int.xmodel -a /opt/vitis_ai/compiler/arch/DPUCVDX8H/VCK5000/arch.json -o vck_5000_class_weight/ -n YNET`
 
 ## 3.3 Inference:
 
@@ -290,7 +290,11 @@ The classification output is given at the end of the inference code which tells 
 
 To execute the inference code on VCK5000 run the below command
 
-`python app_mt_demo_hackster.py --images unseen_data/crops --model YNET_FFT.xmodel -t 12`
+`python app_deep_fake_inference.py --images unseen_data/crops --model YNET.xmodel -t 12`
+
+To execute the video inference code on VCK5000 run the below command
+
+`python deep_fakes_video_inference.py`
 
 # CHAPTER 4: RESULTS
 - vedant 

@@ -138,8 +138,8 @@ def get_subgraph(g):
 if __name__ == "__main__":
     # Change variables below for your setup
     threads = 1
-    path = 'resize.avi'
-    model   = '../vck_5000_class_weight/YNET_FFT.xmodel' 
+    path = 'deep_fake_video.avi'
+    model   = 'YNET.xmodel' 
 
     g = xir.Graph.deserialize(model)
     subgraphs = g.get_root_subgraph().toposort_child_subgraph()

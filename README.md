@@ -252,6 +252,12 @@ git clone https://github.com/DeepYNet/Deepfake_Inference_On_VCK5000
 cd deepfake_vitis_ai/build/float_model/
 gdown https://drive.google.com/uc?id=1pmXnmlShfY9eIOAqmx8H_iBIOTNnNbw3
 ```
+Also download the calibration dataset required for quantization.
+```bash
+git clone https://github.com/DeepYNet/Deepfake_Inference_On_VCK5000
+cd deepfake_vitis_ai/build/float_model/
+gdown https://drive.google.com/file/d/15nZtiX05VepLW0DGgB79iySGC1HsfXJd/view?usp=sharing
+```
 
 Then run quant script using:
 

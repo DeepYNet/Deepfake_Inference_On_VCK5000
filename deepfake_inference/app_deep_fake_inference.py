@@ -35,8 +35,6 @@ def runDPU(id,start,dpu,img):
     outputTensors = dpu.get_output_tensors()
     output_fixpos = outputTensors[0].get_attr("fix_point")
     output_fixpos_2 = outputTensors[1].get_attr("fix_point")
-    print('fixpos for output = ',output_fixpos)
-    print('fixpos for output 2 = ',output_fixpos_2)
     
     output_scale = 1 / (2**output_fixpos)
     output_scale_2 = 1 / (2**output_fixpos_2)

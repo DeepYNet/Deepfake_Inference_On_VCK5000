@@ -295,7 +295,7 @@ The classification output is given at the end of the inference code which tells 
 
 Extract the unseen_data from google drive using the command given below
 
-`gdown `python app_deep_fake_inference.py --images unseen_data/crops --model YNET.xmodel -t 12`
+`gdown https://drive.google.com/file/d/1l6Z1DuO3uGyBdz_-XS4yJKe7wSpMaj15/view?usp=sharing`
 
 To execute the inference code on VCK5000 run the below command
 

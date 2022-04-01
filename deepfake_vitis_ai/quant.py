@@ -28,8 +28,6 @@ def quantization(model,build_dir,batch_size,quant_mode):
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     dir_img = Path('fyp_data/crops/')
     dir_mask = Path('fyp_data/masks/')
-    dir_checkpoint = Path('./checkpoints/')
-    dset_dir = build_dir + '/dataset'
     float_model = build_dir + '/float_model'
     quant_model = build_dir + '/quant_model'
     dataset = CarvanaDataset(dir_img, dir_mask, img_scale)

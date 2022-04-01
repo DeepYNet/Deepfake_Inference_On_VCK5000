@@ -58,10 +58,8 @@ def outputStream(queueOut):
     count = 0
 
     while isCapturing:
-        img_output = 'output/' + str(count) + '.jpg'
         frame_id, (original_frame, pred_labels) = queueOut.get()
         pred_labels = pred_labels.astype('float32')
-        output = pred_labels
         torch_array = torch.from_numpy(pred_labels)
         torch_array = torch_array.unsqueeze(0)
         torch_array = torch_array.permute(0,3,1,2)

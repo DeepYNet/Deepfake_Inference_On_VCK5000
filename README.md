@@ -308,9 +308,9 @@ To execute the video inference code on VCK5000 run the below command
 # CHAPTER 4: RESULTS
 Below we have shown the results of a video from the test dataset on U-YNet model on VCK5000. The generated mask is overlapped on the video to get a better understanding of where the frame was modified.
 
-[![video](https://img.youtube.com/watch?v=c3edt95_qlM.jpg)](https://youtube.com/watch?v=c3edt95_qlM)
+[![video](https://user-images.githubusercontent.com/22630228/161195300-b13b195d-a2e5-47fc-8eda-ca66b2ded5dc.png)](https://youtube.com/watch?v=c3edt95_qlM)
 
-[![video](https://img.youtube.com/watch?v=n57Yemfs9Gg.jpg)](https://youtube.com/watch?v=n57Yemfs9Gg)
+[![video](https://user-images.githubusercontent.com/22630228/161195208-b384b8a3-caa5-4d0c-bfe4-d7f7465ebd82.png)](https://youtube.com/watch?v=n57Yemfs9Gg)
 
 
 ![image](assets/output_compare.jpeg)

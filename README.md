@@ -313,6 +313,8 @@ Below we have shown the results of a video from the test dataset on U-YNet model
 
 ![image](assets/Table.jpeg) 
 
+![image](assets/Classification_output.jpeg)
+
 
 # CHAPTER 5: Future Goals
 

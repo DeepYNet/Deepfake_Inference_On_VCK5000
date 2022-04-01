@@ -293,6 +293,10 @@ We then append the images in a list and pass it onto the compiled model which is
 
 The classification output is given at the end of the inference code which tells us how well the model performed on unseen data. A Json file contains the label for unseen data, we compare it with the model output and print the accuracy of how well it performs.
 
+Extract the unseen_data from google drive using the command given below
+
+`gdown `python app_deep_fake_inference.py --images unseen_data/crops --model YNET.xmodel -t 12`
+
 To execute the inference code on VCK5000 run the below command
 
 `python app_deep_fake_inference.py --images unseen_data/crops --model YNET.xmodel -t 12`
@@ -313,7 +317,7 @@ Below we have shown the results of a video from the test dataset on U-YNet model
 
 ![image](assets/Table.jpeg) 
 
-![image](assets/Classification_output.jpeg)
+![image](assets/classification_output.png)
 
 
 # CHAPTER 5: Future Goals

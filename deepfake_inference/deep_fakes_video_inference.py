@@ -88,7 +88,6 @@ def outputStream(queueOut):
         cv2.imshow('output_on_face', img_out)
         cv2.waitKey(1)
         count += 1
-        img_out = seg_mask
         prev = frame_id 
 
     out.release()

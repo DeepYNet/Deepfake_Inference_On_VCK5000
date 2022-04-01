@@ -47,7 +47,7 @@ def quantization(model,build_dir,batch_size,quant_mode):
   
 
     net = model
-    net.load_state_dict(torch.load(os.path.join(float_model,'checkpoint_epoch_224x224_35.pth'),map_location='cuda:0'))
+    net.load_state_dict(torch.load(os.path.join(float_model,'checkpoint_epoch_224x224_35.pth'),map_location=device))
     
     if (quant_mode=='test'):
         batch_size = 1

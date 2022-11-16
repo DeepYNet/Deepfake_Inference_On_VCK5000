@@ -339,3 +339,17 @@ We have observed that VCK5000 beats various other inference nodes like Nvidia T4
 In short following image describes the performance of the VCK5000 Card by Xilinx: 
 
 ![image](https://user-images.githubusercontent.com/22630228/161130772-04bfa9b7-366f-491f-8e0b-610aa0b05557.png)
+
+# CHAPTER 6: PUBLICATION
+
+If you want to read more about the problem statement and research done in this project then please read our pre-peer-reviewed preprint: <https://arxiv.org/abs/2210.14743>
+
+Please cite us by adding the following bibitem to your list if you are referring to our research:
+
+```
+\bibitem{2210.14743}
+Omkar Bhilare, Rahul Singh, Vedant Paranjape, Sravan Chittupalli, Shraddha Suratkar and Faruk Kazi.
+\newblock DEEPFAKE CLI: Accelerated Deepfake Detection using FPGAs, 2022;
+\newblock arXiv:2210.14743.
+```
+This preprint has not undergone peer review or any post-submission improvement or corrections. The Version of Record of this contribution is published in LNCS [13798], PDCAT 2022, and is available online at [this https URL ]
